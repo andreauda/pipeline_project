@@ -1,0 +1,32 @@
+# API configuration
+api:
+  base_url: "https://jsonplaceholder.typicode.com"
+  timeout: 10
+
+  headers:
+    Content-Type: "application/json"
+    Accept: "application/json"
+
+# INGESTION configuration (⚠️ separata da api)
+ingestion:
+  endpoints:
+    - "/users"
+    - "/posts"
+    - "/comments"
+
+# RETRY configuration - 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout
+retry:
+  max_attempts: 3
+  backoff_factor: 0.2
+  status_forcelist: [500, 502, 503, 504]
+
+# RATE LIMIT configuration - 429 Too Many Requests
+rate_limit:
+  default_sleep: 2
+  max_sleep: 60
+
+# LOGGING configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  structured: false
